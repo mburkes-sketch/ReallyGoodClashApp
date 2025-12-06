@@ -28,11 +28,11 @@ pymongo==4.0.2
 pytest==7.4.1
 pytest-flask==1.2.0
 python-dotenv==0.19.2
-requests==2.27.1
+requests==2.31.0
 sentinels==1.0.0
 soupsieve==2.5
 tomli==2.0.1
-urllib3==1.26.9
+urllib3==2.1.0
 waitress==2.1.2
 Werkzeug==2.0.3
 WTForms==3.0.1
