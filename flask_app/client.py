@@ -1,6 +1,6 @@
 import requests
 
-API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6ImJlMGFkODI1LTYzNmYtNDcxMC1hZTRmLTc5M2Q2NDk2MzgzMiIsImlhdCI6MTc2NDk2NzkxMCwic3ViIjoiZGV2ZWxvcGVyL2EyYzJjOTVhLWE2MzAtYTEyZC1hZmY4LTBlNjJjZThhODM2NCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxMjkuMi44OS43NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.nuu500BNHwrqDejdOcvvTrCmN44iAAhN61JzPjdWlzghVAJcI7QMig3mETaEAzRfaXSreZk1wIRZ6E5tql4Sjw"
+API_TOKEN = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjRiMjE3YTZlLTZlYjQtNDk1NC1iNTdmLTBjNTRmODhiMWVmMSIsImlhdCI6MTc2NTAzNzY2MCwic3ViIjoiZGV2ZWxvcGVyL2EyYzJjOTVhLWE2MzAtYTEyZC1hZmY4LTBlNjJjZThhODM2NCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI1MC4xNDQuMjEzLjIyNiJdLCJ0eXBlIjoiY2xpZW50In1dfQ.LcgiQGWGQa72eGuSX1ATkUxsL1xewxqcZzwTpv3hGyQ1T6usn4UPU0gSKXPWEVus0lBHrrpEhFcwjT3-mptc-w"
 
 import requests
 
@@ -12,12 +12,9 @@ ENDPOINT = '/cards'
 
 
 class ClasherClient(object):
-    def __init__(self, api_key):
+    def __init__(self):
         self.sess = requests.Session()
-        self.base_url = f"https://api.clashroyale.com/v1"
-        self.headers = {
-            'Authorization': f'Bearer {api_key}'
-        }
+        self.base_url = f"http://35.237.27.6:8080/"
 
     def search_by_player_id(self, id):
         """
@@ -28,9 +25,10 @@ class ClasherClient(object):
         :param self: Description
         :param id: Description
         """
-        endpoint = f'/players/{id}'
+        endpoint = f'player/{id}'
 
-        response = self.sess.get(self.base_url + endpoint, headers=self.headers)
+        print(self.base_url + endpoint)
+        response = self.sess.get(self.base_url + endpoint)
         
         if response.status_code == 200:
             data = response.json()
@@ -54,7 +52,7 @@ class ClasherClient(object):
 if __name__ == "__main__":
     import os
 
-    client = ClasherClient("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjA2NmM2MzAyLWE3NTYtNDI2Ni1hOTMyLTc0ZTc4NWQzNjI1YiIsImlhdCI6MTc2Mzk5ODY5Mywic3ViIjoiZGV2ZWxvcGVyL2EyYzJjOTVhLWE2MzAtYTEyZC1hZmY4LTBlNjJjZThhODM2NCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxMjkuMi44OS40NyJdLCJ0eXBlIjoiY2xpZW50In1dfQ.2QRR4Raq2d3dQME-F1rhogmmxTP4L-dOZubqbvg8hlHIrprgh4cfmhZQhZlTzvmSbVbTjST_7X8DFbB4AzEMoQ")
+    client = ClasherClient()
 
     name = client.search_by_player_id("YP9JJPJLY")
 
