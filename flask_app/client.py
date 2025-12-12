@@ -38,6 +38,9 @@ class ClasherClient(object):
                 f"Request failed with status code: {response.status_code}. \n Error Message: {response.text}"
             )
         
+    def get_cards():
+        pass
+        
         
 if __name__ == "__main__":
     import os
