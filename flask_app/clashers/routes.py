@@ -17,7 +17,7 @@ def player_search():
     if form.validate_on_submit():
         stats = client.search_by_player_id(form.player_tag.data)
         
-        if not stats:
+        if stats is None:
             flash(f"Player with tag {form.player_tag.data} not found.")
             
     return render_template("playerSearch.html", form=form, stats=stats, error=error)
