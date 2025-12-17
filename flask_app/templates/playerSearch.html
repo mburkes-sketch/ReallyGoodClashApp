@@ -1,0 +1,46 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container mx-auto p-6 max-w-2xl">
+    <div class="bg-white p-8 rounded-xl shadow-md">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">Find a Player</h2>
+        
+        <form method="POST" action="" class="mb-6">
+            {{ form.csrf_token }}
+            <div class="flex gap-4">
+                {{ form.player_tag(class="flex-grow px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500", placeholder="#TAG (e.g. #YP9JJPJLY)") }}
+                {{ form.submit(class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg cursor-pointer transition") }}
+            </div>
+            {% if form.player_tag.errors %}
+                <div class="text-red-500 text-sm mt-2">{{ form.player_tag.errors[0] }}</div>
+            {% endif %}
+        </form>
+
+        {% if stats %}
+        <div class="mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
+            <div class="flex items-center justify-between border-b pb-4 mb-4">
+                <h3 class="text-2xl font-bold text-gray-800">{{ stats.name }}</h3>
+                <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">{{ stats.tag }}</span>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <p class="text-gray-500 text-xs uppercase font-bold">Level</p>
+                    <p class="text-xl font-semibold">{{ stats.expLevel }}</p>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase font-bold">Trophies</p>
+                    <p class="text-xl font-semibold">{{ stats.trophies }}</p>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase font-bold">Arena</p>
+                    <p class="text-lg">{{ stats.arena.name }}</p>
+                </div>
+                <div>
+                    <p class="text-gray-500 text-xs uppercase font-bold">Clan</p>
+                    <p class="text-lg">{{ stats.clan.name if stats.clan else "No Clan" }}</p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

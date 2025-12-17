@@ -1,0 +1,98 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container mx-auto p-6">
+    
+    <div class="bg-white shadow-xl rounded-2xl p-8 mb-12 border border-gray-100">
+        {% if stats %}
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b pb-6">
+                <div>
+                    <h2 class="text-5xl font-extrabold text-gray-900 tracking-tight">{{ stats.name }}</h2>
+                    <p class="text-xl text-gray-500 font-mono mt-1">{{ stats.tag }}</p>
+                </div>
+                
+                <div class="flex gap-6 mt-4 md:mt-0 text-right">
+                    <div class="bg-yellow-50 px-6 py-3 rounded-xl border border-yellow-200">
+                        <p class="text-xs font-bold text-yellow-800 uppercase tracking-widest">Trophies</p>
+                        <p class="text-3xl font-black text-yellow-600">🏆 {{ stats.trophies }}</p>
+                    </div>
+                    <div class="bg-purple-50 px-6 py-3 rounded-xl border border-purple-200">
+                        <p class="text-xs font-bold text-purple-800 uppercase tracking-widest">Arena</p>
+                        <p class="text-lg font-bold text-purple-700">{{ stats.arena.name }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h3 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="bg-blue-600 w-2 h-8 rounded-full"></span>
+                    Current In-Game Deck
+                </h3>
+                
+                <div class="grid grid-cols-4 gap-4 max-w-4xl">
+                    {% for card in stats.currentDeck %}
+                    <div class="relative group">
+                        <img src="{{ card.iconUrls.medium }}" 
+                             alt="{{ card.name }}" 
+                             class="w-full h-auto transform transition duration-200 group-hover:scale-105">
+                        <span class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white text-center text-xs py-1 opacity-0 group-hover:opacity-100 transition">
+                            {{ card.name }}
+                        </span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+        {% else %}
+            <div class="text-center py-10 bg-red-50 rounded-xl border border-red-100">
+                <h3 class="text-2xl font-bold text-red-600 mb-2">Player Stats Unavailable</h3>
+                <p class="text-gray-600">
+                    We couldn't load stats for tag <span class="font-mono font-bold">{{ current_user.player_tag }}</span>.
+                </p>
+            </div>
+        {% endif %}
+    </div>
+
+
+    <div class="border-t pt-8">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-4xl font-bold text-gray-800">Saved Decks</h3>
+            <a href="{{ url_for('users.deck_builder') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg shadow transition">
+                + Build New
+            </a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {% for deck in decks %}
+            <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden border border-gray-200 flex flex-col">
+                
+                <div class="p-6 pb-4">
+                    <h4 class="font-bold text-2xl text-gray-900 mb-1">{{ deck.title }}</h4>
+                    <p class="text-gray-500 text-sm italic">{{ deck.description or "No description provided." }}</p>
+                </div>
+
+                <div class="bg-gray-50 p-4 mt-auto">
+                    <div class="grid grid-cols-4 gap-2">
+                        {% for card_id in deck.cards %}
+                            {% if card_map and card_id in card_map %}
+                                <div class="relative" title="ID: {{ card_id }}">
+                                    <img src="{{ card_map[card_id] }}" 
+                                         class="w-full h-auto">
+                                </div>
+                            {% else %}
+                                <div class="bg-gray-200 aspect-[4/5] flex items-center justify-center text-[8px] text-center p-1 rounded">
+                                    {{ card_id }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="col-span-3 text-center py-12 text-gray-400">
+                    You haven't built any decks yet.
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
