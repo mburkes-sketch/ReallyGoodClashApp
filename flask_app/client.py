@@ -38,8 +38,14 @@ class ClasherClient(object):
                 f"Request failed with status code: {response.status_code}. \n Error Message: {response.text}"
             )
         
-    def get_cards():
-        pass
+    def get_cards(self):
+        endpoint = "cards"
+        resp = self.sess.get(self.base_url + endpoint)
+        
+        if resp.status_code == 200:
+            return resp.json() 
+        else:
+            return []
         
         
 if __name__ == "__main__":
