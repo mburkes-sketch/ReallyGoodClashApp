@@ -1,0 +1,29 @@
+{% extends "header.html" %}
+{% block content %}
+<div class="container mx-auto max-w-md mt-20 p-8 bg-white shadow-xl rounded-xl border border-gray-100">
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Log In</h2>
+    
+    <form method="POST" action="">
+        {{ form.csrf_token }}
+        <div class="mb-4">
+            {{ form.username.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.username(class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+            {% if form.username.errors %}
+                <p class="text-red-500 text-xs italic mt-1">{{ form.username.errors[0] }}</p>
+            {% endif %}
+        </div>
+        <div class="mb-6">
+            {{ form.password.label(class="block text-gray-700 text-sm font-bold mb-2") }}
+            {{ form.password(class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500") }}
+            {% if form.password.errors %}
+                <p class="text-red-500 text-xs italic mt-1">{{ form.password.errors[0] }}</p>
+            {% endif %}
+        </div>
+        {{ form.submit(class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg cursor-pointer transition") }}
+    </form>
+    
+    <div class="text-center mt-6 text-sm text-gray-600">
+        Don't have an account? <a class="text-blue-600 hover:underline font-bold" href="{{ url_for('users.register') }}">Register here</a>.
+    </div>
+</div>
+{% endblock %}
