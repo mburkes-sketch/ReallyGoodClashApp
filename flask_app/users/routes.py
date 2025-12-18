@@ -144,6 +144,7 @@ def deck_simulator():
         deck2 = Deck.objects(id=deck2_id).first()
         
         if deck1 and deck2:
+            model_path = get_model_path()
             file = open(model_path, 'rb')
             artifacts = pickle.load(file)
             file.close()
@@ -173,5 +174,5 @@ def deck_simulator():
                 confidence = round((1 - probability) * 100, 1)
                 
             simulation_result = "Prediction: " + winner + " wins! (Confidence: " + str(confidence) + "%)"
-    
+
     return render_template("deckSimulator.html", decks=my_decks, result=simulation_result)
