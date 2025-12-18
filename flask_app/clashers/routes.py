@@ -15,7 +15,7 @@ def player_search():
     error = None
 
     if form.validate_on_submit():
-        stats = client.search_by_player_id(form.player_tag.data)
+        stats = client.search_by_player_id(form.player_tag.data[1:])
         
         if stats is None:
             flash(f"Player with tag {form.player_tag.data} not found.")
