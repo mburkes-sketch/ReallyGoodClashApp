@@ -43,7 +43,7 @@ def register():
             username=form.username.data, 
             email=form.email.data, 
             password=hashed,
-            player_tag=form.player_tag.data
+            player_tag=form.player_tag.data[1:]
         )
         user.save()
         return redirect(url_for("users.login"))
