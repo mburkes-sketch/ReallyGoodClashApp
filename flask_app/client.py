@@ -23,8 +23,6 @@ class ClasherClient(object):
         
         # if response.status_code == 200:
         #     data = response.json()
-
-            return data
         
         # elif response.status_code == 403:
         # # 403 Forbidden is often a sign of an incorrect IP address or token
