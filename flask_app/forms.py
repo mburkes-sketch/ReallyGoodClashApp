@@ -11,6 +11,7 @@ from wtforms.validators import (
     EqualTo,
     ValidationError,
 )
+from . import client 
 
 
 from .models import User
@@ -22,6 +23,13 @@ class RegistrationForm(FlaskForm):
     confirm_password = PasswordField("Confirm Password", validators=[InputRequired(), EqualTo("password")])
     player_tag = StringField("Clash Royale Player Tag", validators=[InputRequired()])
     submit = SubmitField("Sign Up")
+
+    def validate_player_tag(self, player_tag):
+        if player_tag.data[0] != "#":
+            raise ValidationError("Invalid player id: must start with #")
+        
+        if client.search_by_player_id(player_tag.data[1:]) == None:
+            raise ValidationError("Invalid player id: player does not exist")
 
     def validate_username(self, username):
         user = User.objects(username=username.data).first()
