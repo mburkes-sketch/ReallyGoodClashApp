@@ -23,7 +23,7 @@ class ClasherClient(object):
         if response.status_code == 200:
             data = response.json()
 
-            return data["name"]
+            return data
         
         elif response.status_code == 403:
         # 403 Forbidden is often a sign of an incorrect IP address or token
@@ -38,8 +38,37 @@ class ClasherClient(object):
                 f"Request failed with status code: {response.status_code}. \n Error Message: {response.text}"
             )
         
-    def get_cards():
-        pass
+    def get_cards(self):
+        """
+        Docstring for search_by_player_id
+
+        Searches the API for the player associated with id.
+        
+        :param self: Description
+        :param id: Description
+        """
+        endpoint = f'cards'
+
+        print(self.base_url + endpoint)
+        response = self.sess.get(self.base_url + endpoint)
+        
+        if response.status_code == 200:
+            data = response.json()
+
+            return data["items"]
+        
+        elif response.status_code == 403:
+        # 403 Forbidden is often a sign of an incorrect IP address or token
+            raise ValueError(
+                "Error 403: Forbidden. Check your whitelisted IP address or your API key."
+            )
+
+        else:
+            print(f"Request failed with status code: {response.status_code}")
+            print("Error Message:", response.text)
+            raise ValueError(
+                f"Request failed with status code: {response.status_code}. \n Error Message: {response.text}"
+            )
         
         
 if __name__ == "__main__":
@@ -47,6 +76,8 @@ if __name__ == "__main__":
 
     client = ClasherClient()
 
-    name = client.search_by_player_id("YP9JJPJLY")
+    player = client.search_by_player_id("YP9JJPJLY")
+    cards = client.get_cards()
 
-    print(name)
+    print(player["name"])
+    print(cards[1])
