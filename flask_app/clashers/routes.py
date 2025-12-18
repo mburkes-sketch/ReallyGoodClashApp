@@ -21,3 +21,10 @@ def player_search():
             flash(f"Player with tag {form.player_tag.data} not found.")
             
     return render_template("playerSearch.html", form=form, stats=stats, error=error)
+
+@clashers.route("/search/<player_id>", methods=["GET"])
+def player_account(player_id):
+    print(player_id)
+    player_stats = client.search_by_player_id(player_id)
+
+    return render_template("playerAccount.html", stats = player_stats, user_acc=False)

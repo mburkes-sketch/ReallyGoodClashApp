@@ -101,7 +101,8 @@ def account():
 
     return render_template(
         "playerAccount.html", 
-        stats=player_stats, 
+        stats=player_stats,
+        user_acc=True, 
         decks=user_decks, 
         card_map=card_img_map
     )

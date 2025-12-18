@@ -16,8 +16,12 @@
         </form>
 
         {% if stats %}
-        <div class="mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200">
-            <div class="flex items-center justify-between border-b pb-4 mb-4">
+        <a 
+            href="{{ url_for('clashers.player_account', player_id=stats.tag[1:]) }}"
+        >
+        <div class="mt-8 p-6 bg-gray-50 rounded-xl border border-gray-200 hover:bg-gray-200 hover:scale-105 transition">
+            
+            <div class="flex items-center justify-between border-b border-gray-300 pb-4 mb-4">
                 <h3 class="text-2xl font-bold text-gray-800">{{ stats.name }}</h3>
                 <span class="bg-yellow-400 text-yellow-900 text-xs font-bold px-2 py-1 rounded">{{ stats.tag }}</span>
             </div>
