@@ -46,7 +46,8 @@ def register():
             player_tag=form.player_tag.data[1:]
         )
         user.save()
-        return redirect(url_for("users.login"))
+        login_user(user)
+        return redirect(url_for("users.account"))
 
     return render_template("register.html", form=form)
 
