@@ -33,7 +33,7 @@ Allows users to search a player by in game id and get their player stats
 Make a deck form:
 Allows users to make a deck from the 100ish cards in the game. The deck will be saved as a part of their user profile.
 
-### Q4 List and describe your routes/blueprints (don’t need to list all routes/blueprints you may 
+### Q4 List and describe your routes/blueprints (don’t need to list all routes/blueprints you may have–just enough for the requirement): 
 
 User blueprint contains all routes that are related to user functionality. Users can login, register, build decks, and simulate decks against each other. Only users can do these actions.
 @user.login - route to log users in
