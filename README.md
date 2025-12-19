@@ -11,9 +11,13 @@ Clash Royale app that lets users associate their account with their in-game acco
 
 ML:
 Simulate decks against each other, by having a model learn winners/losers from patterns in data (dataset contained almost 37 million matches of 1v1 decks, of which we used 1.1 million matches to train model due to time and RAM constraints)
+
 *Citation: Bwando Wando. (2024). Clash Royale S18 Ladder Datasets (37.9M matches) [Data set]. Kaggle. https://doi.org/10.34740/KAGGLE/DSV/10035519*
+
 **NOTE:** In the process of trying to better the model’s accuracy, we discovered a lot of real research that has been done in predicting winners/losers based on various factors. When predicting such skill-based games (i.e. Hearthstone, League of Legends, Clash Royale, etc.) based on previous matches, we saw that for many people (who did it for fun or for real research), their models’ accuracy was usually in the 55-60% range. This apparently is the best, with some models reaching 75% accuracy given that they had more context and factors to consider in deciding winners/losers. Our model’s accuracy is at 58.14%, so we thought that was sufficient enough given our data and constraints.
+
 *Articles:*
+
 1. https://medium.com/@jdleo/i-trained-ai-on-70-200-clash-royale-battles-to-settle-the-ultimate-debate-does-your-deck-actually-2e10fc27eff6
 2. Hearthstone: https://slothlab.info/assets/pdf/eger2020fdg.pdf
 3. https://ieeexplore.ieee.org/document/8860062
